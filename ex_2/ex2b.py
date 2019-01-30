@@ -11,19 +11,19 @@ drawer = MultiplePlot([10, 10], [1, 2])
 drawer.add(original, "Original")
 
 accumulator, thetas, rhos = hough_line(original)
-hough_lines = extract_hough_lines(accumulator, thetas, rhos, 4, 5)
+hough_lines = extract_hough_lines(accumulator, thetas, rhos, 4, 5, 1)
 
 out = np.zeros_like(original)
 
-for i in range(4):
-    hough_lines[i]["rho"] = abs(int(hough_lines[i]["rho"]))
-    if np.rad2deg(hough_lines[i]["theta"]) == -90:
-        hough_lines[i]["rho"] += 1
+for i in hough_lines:
+    i["rho"] = abs(int(i["rho"]))
+    if np.rad2deg(i["theta"]) == -90:
+        i["rho"] += 1
         for x_idx in range(out.shape[1]):
-            out[hough_lines[i]["rho"], x_idx] += 1
-    elif np.rad2deg(hough_lines[i]["theta"]) == 0:
+            out[i["rho"], x_idx] += 1
+    elif np.rad2deg(i["theta"]) == 0:
         for y_idx in range(out.shape[0]):
-            out[y_idx, hough_lines[i]["rho"]] += 1
+            out[y_idx, i["rho"]] += 1
 
 corners = np.where(out == 2)
 

@@ -1,5 +1,8 @@
 import numpy as np
 
+rho_key = 'rho'
+theta_key = 'theta'
+
 
 def hough_line(img):
     # Rho and Theta ranges
@@ -25,15 +28,21 @@ def hough_line(img):
     return accumulator, thetas, rhos
 
 
-def extract_hough_lines(_accumulator, thetas, rhos, lines_num, frame_size):
+def extract_hough_lines(_accumulator, thetas, rhos, lines_num, clean_frame_size, distance_constraint):
     accumulator = np.copy(_accumulator)
     lines = []
-    for i in range(lines_num):
+    i = 0
+    while i < lines_num:
         idx = np.argmax(accumulator)
         rho = rhos[idx // accumulator.shape[1]]
         theta = thetas[idx % accumulator.shape[1]]
-        lines.append({"rho": rho, "theta": theta})
-        zero_frame(accumulator, frame_size, (idx // accumulator.shape[1], idx % accumulator.shape[1]))
+        for line in lines:
+            if abs(line[rho_key] - rho) < distance_constraint and line[theta_key] == theta:
+                break
+        else:
+            lines.append({rho_key: rho, theta_key: theta})
+            i += 1
+        zero_frame(accumulator, clean_frame_size, (idx // accumulator.shape[1], idx % accumulator.shape[1]))
     return lines
 
 

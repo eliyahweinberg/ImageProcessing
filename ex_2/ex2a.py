@@ -2,7 +2,6 @@ import ImageUtils.plotter as my_plt
 from ImageUtils.canny import *
 from ImageUtils.utils import to_ndarray
 from ImageUtils.utils import max_with_frame
-import numpy as np
 import matplotlib.pyplot as plt
 
 
