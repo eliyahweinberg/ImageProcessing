@@ -11,7 +11,7 @@ drawer = MultiplePlot([10, 10], [1, 2])
 drawer.add(original, "Original")
 
 accumulator, thetas, rhos = hough_line(original)
-hough_lines = extract_hough_lines(accumulator, thetas, rhos, 4, 5, 1)
+hough_lines = extract_hough_lines(accumulator, thetas, rhos, 4, 5)
 
 out = np.zeros_like(original)
 
