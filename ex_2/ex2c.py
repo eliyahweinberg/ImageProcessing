@@ -11,7 +11,7 @@ rho_key = 'rho'
 theta_key = 'theta'
 
 original = to_ndarray('sudoku.jpg')
-original1 = cv2.imread('sudoku.jpg')
+img_show = cv2.imread('sudoku.jpg')
 
 drawer = MultiplePlot([10, 10], [1, 2])
 
@@ -30,15 +30,13 @@ img5 = tracking(np.copy(img4), weak, 50)
 
 img5[:, 400:] = 0
 
-# plt.vlines(indexes, 0, original.shape[0], 'r')
 drawer.add(original, "Original")
 
 
 accumulator, thetas, rhos = hough_line(img5)
-hough_lines = extract_hough_lines(accumulator, thetas, rhos, 8, 5, 10)
+hough_lines = extract_hough_lines(accumulator, thetas, rhos, 8, 5, 30, 10)
 out = np.zeros_like(original)
 lines = []
-_x1, _y1, _x2, _y2 = [], [], [], []
 for line in hough_lines:
     _line = []
     if abs(np.rad2deg(line[theta_key])) == 90:
@@ -68,16 +66,15 @@ for line in hough_lines:
                 out[y, x] += 1
                 _line.append((x, y))
     lineThickness = 2
-    cv2.line(original1, _line[0], _line[-1], (0, 0, 255), lineThickness)
+    cv2.line(img_show, _line[0], _line[-1], (0, 0, 255), lineThickness)
     lines.append(_line)
 horizontal_found = 0
 for i in range(len(lines)):
     for j in range(len(lines)):
         if i != j:
             test_intersection(lines[i][0],lines[i][-1], lines[j][0],lines[j][-1])
-# cv2.startWindowThread()
-# cv2.namedWindow("a")
-cv2.imshow("a", original1)
+
+cv2.imshow("Original", img_show)
 cv2.waitKey(0)
 # drawer.add(out, "Lines")
 # drawer.show()

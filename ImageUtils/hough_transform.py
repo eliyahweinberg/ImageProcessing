@@ -32,20 +32,21 @@ def extract_hough_lines(_accumulator, thetas, rhos, lines_num, clean_size, dista
     accumulator = np.copy(_accumulator)
     averaged = []
     lines = []
-    i = 0
-    while i < lines_num:
+    j = 0
+    while j < lines_num:
         idx = np.argmax(accumulator)
         rho = rhos[idx // accumulator.shape[1]]
         theta = thetas[idx % accumulator.shape[1]]
-        for line in lines:
-            if abs(line[rho_key] - rho) < distance_constraint and abs(line[theta_key] - theta) < 5:
-                if abs(line[rho_key] - rho) < avg_constraint and line not in averaged:
-                    line[rho_key] = (line[rho_key] + rho) // 2
-                    averaged.append(line)
+        for i in range(len(lines)):
+            if abs(lines[i][rho_key] - rho) < distance_constraint and abs(lines[i][theta_key] - theta) < 5:
+                if abs(lines[i][rho_key] - rho) < avg_constraint and lines[i] not in averaged:
+                    lines[i][rho_key] = (lines[i][rho_key] + rho) // 2
+                    averaged.append(lines[i])
+                    break
                 break
         else:
             lines.append({rho_key: rho, theta_key: theta})
-            i += 1
+            j += 1
         zero_frame(accumulator, clean_size, (idx // accumulator.shape[1], idx % accumulator.shape[1]))
     return lines
 
