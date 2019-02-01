@@ -204,3 +204,18 @@ def test_intersection(pt1, pt2, ptA, ptB):
 
     result = intersect_lines(pt1, pt2, ptA, ptB)
     print("    Intersection result =", result)
+
+
+def zero_frame(arr, frame_size, index):
+    if frame_size % 2 != 1:
+        print("illegal frame dimensions")
+        return
+    width, height = arr.shape
+    offset = int(frame_size // 2)
+    for i in range(frame_size):
+        x_idx = index[1] - offset + i
+        if 0 <= x_idx < height:
+            for j in range(frame_size):
+                y_idx = index[0] - offset + j
+                if 0 <= y_idx < width:
+                    arr[y_idx, x_idx] = 0

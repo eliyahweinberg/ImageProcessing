@@ -1,4 +1,5 @@
 import numpy as np
+from ImageUtils.utils import zero_frame
 
 rho_key = 'rho'
 theta_key = 'theta'
@@ -51,17 +52,4 @@ def extract_hough_lines(_accumulator, thetas, rhos, lines_num, clean_size, dista
     return lines
 
 
-def zero_frame(arr, frame_size, index):
-    if frame_size % 2 != 1:
-        print("illegal frame dimensions")
-        return
-    width, height = arr.shape
-    offset = int(frame_size // 2)
-    for i in range(frame_size):
-        x_idx = index[1] - offset + i
-        if 0 <= x_idx < height:
-            for j in range(frame_size):
-                y_idx = index[0] - offset + j
-                if 0 <= y_idx < width:
-                    arr[y_idx, x_idx] = 0
 

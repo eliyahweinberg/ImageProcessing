@@ -7,7 +7,7 @@ original = to_ndarray('sudoku.jpg')
 tresholded = threshold(original, 50)
 
 averaged = convolve(tresholded, kernel_average)
-derivated_x = convolve(averaged, kernel_dx)
+derivated_x = convolve(averaged, kernel_sobel_x_3)
 positives = negative_to_zero(derivated_x)
 cleaned = clean_frame(positives, 2)
 

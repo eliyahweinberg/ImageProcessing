@@ -1,9 +1,7 @@
-import ImageUtils.plotter as my_plt
 from ImageUtils import MultiplePlot
 from ImageUtils.canny import *
 from ImageUtils.utils import to_ndarray, test_intersection
 from ImageUtils.hough_transform import hough_line, extract_hough_lines
-import matplotlib.pyplot as plt
 import sys
 import cv2
 
