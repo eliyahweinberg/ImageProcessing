@@ -10,12 +10,15 @@ original = cv.imread('rise.jpg', 0)
 
 thresholded = threshold(original, 115)
 
-opened = cv.morphologyEx(thresholded, cv.MORPH_OPEN, np.ones((7,7)))
-erosion = cv.erode(opened, np.ones((5,5)), iterations=1)
+opened = cv.morphologyEx(thresholded, cv.MORPH_OPEN, np.ones((7, 7)))
+erosion = cv.erode(opened, np.ones((5, 5)), iterations=1)
 res = opened - erosion
+res[res == 1] = 200
 
 drawer.add(original, "Boundary")
 
 drawer.add(res, "After")
+
+cv.imwrite("rise_hollow.jpg", res)
 
 drawer.show()

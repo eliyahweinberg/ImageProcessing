@@ -72,7 +72,7 @@ horizontal_found = 0
 for i in range(len(lines)):
     for j in range(len(lines)):
         if i != j:
-            test_intersection(lines[i][0],lines[i][-1], lines[j][0],lines[j][-1])
+            test_intersection(lines[i][0], lines[i][-1], lines[j][0], lines[j][-1])
 
 cv2.imshow("Original", img_show)
 cv2.waitKey(0)
