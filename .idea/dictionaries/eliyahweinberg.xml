@@ -3,6 +3,7 @@
     <words>
       <w>cmap</w>
       <w>ndarray</w>
+      <w>thres</w>
     </words>
   </dictionary>
 </component>
