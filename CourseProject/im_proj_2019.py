@@ -206,8 +206,8 @@ def main():
         h, status = cv2.findHomography(pts_src, pts_dst)
         im_out = cv2.warpPerspective(image, h, (im_dst.shape[1], im_dst.shape[0]))
 
-        drawer.add(image, 'Original')
-        drawer.add(im_out, 'Aligned')
+        drawer.add(image, 'Image {0}: Original'.format(file))
+        drawer.add(im_out, 'Image {0}: Aligned'.format(file))
         drawer.show()
         print('\n\n')
 
