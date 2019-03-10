@@ -14,8 +14,12 @@ class MultiplePlot:
         self.ax[-1].set_title(title)
         plt.imshow(image, cmap=_cmap)
 
+    @staticmethod
+    def wait_key():
+        plt.waitforbuttonpress()
 
-    def show(self):
+    @staticmethod
+    def show():
         plt.show()
 
 
