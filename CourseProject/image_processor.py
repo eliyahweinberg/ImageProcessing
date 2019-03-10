@@ -160,7 +160,7 @@ def main():
         image = cv2.imread('ImageInputs/{0}.tif'.format(file))
         gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
 
-        ret, thresh = cv2.threshold(gray, 70, 255, cv2.THRESH_BINARY)
+        ret, thresh = cv2.threshold(gray, 80, 255, cv2.THRESH_BINARY)
         opened = thresh
         for i in range(35):
             opened = cv2.morphologyEx(opened, cv2.MORPH_OPEN, np.ones((3, 3)))
